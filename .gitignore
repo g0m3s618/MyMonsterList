@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Database file
+mymonsterlist.db
+
+# Environment variables
+.env
+
+# Pytest cache
+.pytest_cache/
+
+# MacOS
+.DS_Store
