@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin - Manage Monsters</title>
+    </head>
+    <body>
+        <h1>Manage Monsters</h1>
+        <a href="{{ url_for('add_monster') }}">Add New Monster</a>
+        <ul>
+            {% for monster in monsters %}
+            <li>
+                <strong>{{ monster.name }}</strong> - {{ monster.flavour_type
+                }}<br />
+                <img
+                    src="{{ monster.image_url }}"
+                    alt="{{ monster.name }}"
+                    width="100"
+                /><br />
+                {{ monster.description }}<br />
+                <a href="{{ url_for('edit_monster', monster_id=monster.id) }}"
+                    >Edit</a
+                >
+                <form
+                    action="{{ url_for('delete_monster', monster_id=monster.id) }}"
+                    method="POST"
+                    style="display: inline"
+                >
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

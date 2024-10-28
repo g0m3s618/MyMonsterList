@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edit Monster</title>
+    </head>
+    <body>
+        <h1>Edit Monster</h1>
+        <form
+            action="{{ url_for('edit_monster', monster_id=monster.id) }}"
+            method="POST"
+        >
+            <label for="name">Name:</label>
+            <input
+                type="text"
+                name="name"
+                value="{{ monster.name }}"
+                required
+            /><br />
+
+            <label for="flavour_profile">Flavour Profile:</label>
+            <input
+                type="text"
+                name="flavour_profile"
+                value="{{ monster.flavour_profile }}"
+                required
+            /><br />
+
+            <label for="image_url">Image URL:</label>
+            <input
+                type="text"
+                name="image_url"
+                value="{{ monster.image_url }}"
+                required
+            /><br />
+
+            <label for="description">Description:</label>
+            <textarea name="description" required>
+{{ monster.description }}</textarea
+            ><br />
+
+            <button type="submit">Update Monster</button>
+        </form>
+    </body>
+</html>
