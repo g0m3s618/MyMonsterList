@@ -11,6 +11,9 @@ env/
 # Database file
 mymonsterlist.db
 
+# Migrations
+migrations/
+
 # Environment variables
 .env
 

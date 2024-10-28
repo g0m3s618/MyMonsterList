@@ -5,6 +5,7 @@ from flask_mail import Mail, Message
 from dotenv import load_dotenv
 import os
 from itsdangerous import URLSafeTimedSerializer
+from flask_migrate import Migrate
 
 # Load environment variables from .env file
 load_dotenv()
@@ -31,6 +32,7 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME')
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 mail = Mail(app)
+migrate = Migrate(app, db)
 
 # Initialize the serializer
 s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
@@ -63,6 +65,7 @@ class Monster(db.Model):
     image_url = db.Column(db.String(250), nullable=True)
     flavour_profile = db.Column(db.String(100), nullable=True)
     description = db.Column(db.Text, nullable=True)
+    category = db.Column(db.String(100), nullable=True)
 
 # Create tables if they don't exist
 with app.app_context():
@@ -213,8 +216,9 @@ def add_monster():
         image_url = request.form['image_url']
         flavour_profile = request.form['flavour_profile']
         description = request.form['description']
+        category = request.form['category']
 
-        new_monster = Monster(name=name, image_url=image_url, flavour_profile=flavour_profile, description=description)
+        new_monster = Monster(name=name, image_url=image_url, flavour_profile=flavour_profile, description=description, category=category)
         db.session.add(new_monster)
         db.session.commit()
         flash("Monster added successfully!")
@@ -237,6 +241,7 @@ def edit_monster(monster_id):
     if request.method == 'POST':
         monster.name = request.form['name']
         monster.flavour_profile = request.form['flavour_profile']
+        monster.category = request.form['category']
         monster.image_url = request.form['image_url']
         monster.description = request.form['description']
 

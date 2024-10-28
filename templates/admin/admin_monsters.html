@@ -11,13 +11,14 @@
         <ul>
             {% for monster in monsters %}
             <li>
-                <strong>{{ monster.name }}</strong> - {{ monster.flavour_type
-                }}<br />
+                <strong>{{ monster.name }}</strong> - {{ monster.flavour_profile
+                }} <br />
                 <img
                     src="{{ monster.image_url }}"
                     alt="{{ monster.name }}"
                     width="100"
                 /><br />
+                {{ monster.category }}<br />
                 {{ monster.description }}<br />
                 <a href="{{ url_for('edit_monster', monster_id=monster.id) }}"
                     >Edit</a
